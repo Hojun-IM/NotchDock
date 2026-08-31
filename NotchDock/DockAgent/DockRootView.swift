@@ -57,7 +57,11 @@ struct DockRootView: View {
     private var content: some View {
         if model.state == .expanded {
             OverlayExpandedView(model: model)
-                .padding(OverlayMetrics.contentInset)
+                // 헤더가 카드 좌우 끝까지 닿아야 하므로 좌우 여백은 주지 않는다.
+                // (여백이 필요한 본문 영역은 OverlayExpandedView 안에서 처리한다)
+                //
+                // 상단 여백만 노치 모드와 같은 토큰을 써서, 두 모드의 헤더 높이를 일치시킨다.
+                .padding(.top, OverlayMetrics.Header.topInset)
                 .transition(.overlayExpanded)
         } else {
             OverlayCompactView(model: model)
