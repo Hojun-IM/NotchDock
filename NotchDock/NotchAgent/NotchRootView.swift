@@ -40,6 +40,16 @@ struct NotchRootView: View {
         model.state == .expanded ? expandedRadii.bottom : compactRadii.bottom
     }
 
+    /// 확장 상태에서 콘텐츠를 좌우로 밀어 넣어야 하는 양.
+    ///
+    /// NotchShape 는 위쪽 두 모서리가 "안쪽으로 파고드는" 역곡선이라,
+    /// 실제로 칠해지는 세로 변이 rect.minX 가 아니라 `minX + topCornerRadius` 에 있다.
+    /// 즉 680pt 폭으로 그려도 눈에 보이는 검은 영역은 좌우가 각각 15pt 씩 좁다.
+    ///
+    /// 이만큼 콘텐츠를 안쪽으로 밀지 않으면 헤더의 맨 왼쪽 필터 아이콘과 맨 오른쪽 설정 버튼이
+    /// 보이는 가장자리에 딱 붙어 버린다. (독 모드는 단순 사각형이라 이 보정이 필요 없다)
+    private var expandedSideInset: CGFloat { expandedRadii.top }
+
     // MARK: - 그림자
 
     private var shadowOpacity: CGFloat {
@@ -107,10 +117,9 @@ struct NotchRootView: View {
     private var content: some View {
         if model.state == .expanded {
             OverlayExpandedView(model: model)
-                // 상단에는 실제 노치 높이만큼 여백을 두어 콘텐츠가 노치에 가리지 않게 한다.
-                .padding(.top, model.notchSize.height)
-                .padding(.horizontal, OverlayMetrics.contentInset)
-                .padding(.bottom, OverlayMetrics.contentInset)
+                // 노치 실루엣 안쪽으로 콘텐츠를 밀어 넣는다. 자세한 근거는 아래 두 프로퍼티 주석 참고.
+                .padding(.top, OverlayMetrics.Header.notchTopInset)
+                .padding(.horizontal, expandedSideInset)
                 .transition(.overlayExpanded)
         } else {
             OverlayCompactView(model: model)

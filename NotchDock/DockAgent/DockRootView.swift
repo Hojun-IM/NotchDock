@@ -57,7 +57,8 @@ struct DockRootView: View {
     private var content: some View {
         if model.state == .expanded {
             OverlayExpandedView(model: model)
-                .padding(OverlayMetrics.contentInset)
+                // 헤더가 카드 좌우 끝까지 닿아야 하므로 바깥 여백을 주지 않는다.
+                // (여백이 필요한 본문 영역은 OverlayExpandedView 안에서 처리한다)
                 .transition(.overlayExpanded)
         } else {
             OverlayCompactView(model: model)
