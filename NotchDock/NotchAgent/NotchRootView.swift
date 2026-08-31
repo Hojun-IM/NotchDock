@@ -118,7 +118,7 @@ struct NotchRootView: View {
         if model.state == .expanded {
             OverlayExpandedView(model: model)
                 // 노치 실루엣 안쪽으로 콘텐츠를 밀어 넣는다. 자세한 근거는 아래 두 프로퍼티 주석 참고.
-                .padding(.top, OverlayMetrics.Header.notchTopInset)
+                .padding(.top, OverlayMetrics.Header.topInset)
                 .padding(.horizontal, expandedSideInset)
                 .transition(.overlayExpanded)
         } else {
