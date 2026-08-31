@@ -29,9 +29,16 @@ final class NotchPresenter: OverlayPanelPresenter {
     }
 
     /// 호버 판정 영역 = 화면 상단 중앙에 그려지는 노치 본체.
-    /// 열림/닫힘 크기가 고정값이므로 화면 좌표를 그대로 계산할 수 있다.
+    ///
+    /// 닫힘 상태에서는 화면의 실제 노치 영역(effectiveNotchFrame)을 그대로 사용한다.
+    /// 이미 상단 중앙 정렬된 화면 좌표라 별도 계산이 필요 없고,
+    /// NotchRootView 가 같은 크기로 그리므로 "보이는 영역 = 반응 영역"이 된다.
     override func hoverZone(on screen: NSScreen) -> NSRect {
-        let size = OverlayMetrics.size(for: model.state)
+        guard model.state == .expanded else {
+            return screen.effectiveNotchFrame
+        }
+
+        let size = OverlayMetrics.expandedSize
         return NSRect(
             x: screen.frame.midX - (size.width / 2),
             y: screen.frame.maxY - size.height,

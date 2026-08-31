@@ -37,7 +37,7 @@ final class DockPresenter: OverlayPanelPresenter {
     /// 호버 판정 영역 = 화면 하단 중앙에 그려지는 카드.
     /// DockRootView 의 bottom padding(12) 과 값을 맞춰야 한다.
     override func hoverZone(on screen: NSScreen) -> NSRect {
-        let size = OverlayMetrics.size(for: model.state)
+        let size = OverlayMetrics.size(for: model.state, compact: OverlayMetrics.dockCompactSize)
         return NSRect(
             x: screen.visibleFrame.midX - (size.width / 2),
             y: screen.visibleFrame.minY + Self.bottomPadding,

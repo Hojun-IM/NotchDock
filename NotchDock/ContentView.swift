@@ -60,7 +60,10 @@ struct ContentView: View {
     }
 
     private var overlayDescription: String {
-        let size = OverlayMetrics.size(for: coordinator.state)
+        let compact = coordinator.mode == .notch
+            ? coordinator.model.notchSize
+            : OverlayMetrics.dockCompactSize
+        let size = OverlayMetrics.size(for: coordinator.state, compact: compact)
         return "\(Int(size.width)) × \(Int(size.height))"
     }
 

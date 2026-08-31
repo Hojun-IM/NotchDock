@@ -3,9 +3,9 @@
 //  NotchDock
 //
 //  독(Dock) 모드의 최상위 뷰.
-//  화면 하단에서 떠오르는 반투명 카드이며, 크기는 노치 모드와 동일한 OverlayMetrics 값을 쓴다.
-//   - 닫힘: 140 × 30
-//   - 열림: 680 × 420
+//  화면 하단에서 떠오르는 반투명 카드.
+//   - 닫힘: OverlayMetrics.dockCompactSize (독은 화면 노치와 무관하므로 고정 크기)
+//   - 열림: OverlayMetrics.expandedSize (노치 모드와 동일)
 //
 
 import SwiftUI
@@ -15,7 +15,7 @@ struct DockRootView: View {
     let onHoverChange: (Bool) -> Void
 
     private var size: CGSize {
-        OverlayMetrics.size(for: model.state)
+        OverlayMetrics.size(for: model.state, compact: OverlayMetrics.dockCompactSize)
     }
 
     private var cornerRadius: CGFloat {

@@ -63,9 +63,10 @@ extension NSScreen {
             )
         }
 
-        // 노치가 없는 경우: 메뉴바 높이 × 임의 너비의 가상 노치
-        let fallbackWidth: CGFloat = 220
-        let fallbackHeight = max(menubarHeight, 24)
+        // 노치가 없는 경우: OverlayMetrics 의 폴백 크기로 가상 노치를 만든다.
+        // (메뉴바가 더 두꺼우면 메뉴바 높이를 따라가 화면 상단에 자연스럽게 붙게 한다.)
+        let fallbackWidth = OverlayMetrics.fallbackNotchSize.width
+        let fallbackHeight = max(menubarHeight, OverlayMetrics.fallbackNotchSize.height)
         return CGRect(
             x: frame.midX - (fallbackWidth / 2),
             y: frame.maxY - fallbackHeight,
