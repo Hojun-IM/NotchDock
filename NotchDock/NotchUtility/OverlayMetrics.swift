@@ -26,6 +26,38 @@ enum OverlayMetrics {
     /// 확장 콘텐츠 영역의 안쪽 여백.
     static let contentInset: CGFloat = 16
 
+    /// 아이콘 버튼 같은 작은 컨트롤의 모서리 반경.
+    static let controlRadius: CGFloat = 8
+
+    /// 확장 오버레이 상단 헤더의 치수.
+    ///
+    /// 헤더는 좌우 끝까지 꽉 차게 배치하고(= contentInset 을 적용하지 않고)
+    /// 자기 여백을 스스로 관리한다. 왼쪽(필터)과 오른쪽(설정)의 여백이 다른 이유는
+    /// 필터 아이콘은 버튼 배경이 아이콘보다 크게 잡혀 있어 시각적으로 이미 여백을
+    /// 갖고 있기 때문이다. 숫자를 같게 맞추면 오히려 왼쪽이 더 떠 보인다.
+    enum Header {
+        /// 헤더 줄의 높이.
+        static let height: CGFloat = 52
+        /// 노치 모드에서 헤더 줄을 화면 최상단에서 얼마나 내릴지.
+        ///
+        /// 물리 노치(카메라 하우징)는 화면 "가운데"에만 있고 헤더 항목은 좌우 끝에 있으므로,
+        /// 콘텐츠 전체를 노치 높이(약 30~38pt)만큼 내릴 필요가 없다. 그렇게 하면 헤더가
+        /// 필요 이상으로 아래로 밀려 본문이 좁아진다. 최상단에 딱 붙지만 않을 만큼만 띄운다.
+        static let notchTopInset: CGFloat = 0
+        /// 왼쪽(필터 그룹) 바깥 여백.
+        static let leadingPadding: CGFloat = 14
+        /// 오른쪽(설정 버튼) 바깥 여백.
+        static let trailingPadding: CGFloat = 18
+        /// 필터 버튼 사이 간격.
+        static let itemSpacing: CGFloat = 4
+        /// 아이콘 버튼의 히트 영역 겸 배경 크기.
+        static let controlSize: CGFloat = 28
+        /// 필터 아이콘(SVG) 자체의 크기.
+        static let iconSize: CGFloat = 14
+        /// 설정 톱니 아이콘(SF Symbol)의 폰트 크기.
+        static let settingsIconSize: CGFloat = 17
+    }
+
     /// 상태에 맞는 크기를 돌려준다. 숨김 상태는 닫힘 크기로 수축시켜 자연스럽게 사라지게 한다.
     ///
     /// 이 값은 "화면에 그려지는 크기"인 동시에 "마우스 호버 판정 영역"으로도 쓰인다.
