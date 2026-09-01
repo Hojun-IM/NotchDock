@@ -24,6 +24,12 @@ enum OverlayColors {
     /// 보조 텍스트. 설명이나 비활성 정보에 사용한다.
     static let secondaryText = Color.white.opacity(0.40)
 
+    /// 섹션 제목처럼 정보 위계를 낮춰 표시하는 텍스트.
+    static let sectionLabel = Color.white.opacity(0.38)
+
+    /// 리셋 시점처럼 보조적인 상태 정보를 표시하는 텍스트.
+    static let sectionHint = Color.white.opacity(0.28)
+
     /// 아이콘 버튼의 기본 아이콘 색. 완전한 흰색보다 살짝 눌러 두어야
     /// 선택된 항목(primaryText)과 시각적으로 구분된다.
     static let controlIcon = Color.white.opacity(0.70)
@@ -36,6 +42,17 @@ enum OverlayColors {
     /// 선택된 상태의 버튼 배경. 호버보다 한 단계 밝게 잡아
     /// "호버 중인 버튼"과 "현재 선택된 버튼"이 동시에 있어도 구분된다.
     static let controlSelectedBackground = Color.white.opacity(0.14)
+
+    // MARK: - Usage 진행률
+
+    /// 사용량 진행률 바의 바탕.
+    static let usageTrack = Color.white.opacity(0.11)
+
+    /// 일반 사용량 진행률.
+    static let usageBar = Color.white
+
+    /// 사용량이 높은 구간을 구분하기 위한 진행률.
+    static let usageWarning = Color.white.opacity(0.55)
 
     // MARK: - 구분선
 
