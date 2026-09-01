@@ -31,11 +31,15 @@ struct OverlayExpandedView: View {
                 // TODO: 설정 창 열기 연결.
             }
 
-            // TODO: 실제 본문 콘텐츠 구현 위치.
-            Color.clear
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .padding(.horizontal, OverlayMetrics.contentInset)
-                .padding(.bottom, OverlayMetrics.contentInset)
+            VStack(spacing: 0) {
+                UsageView(selectedFilter: selectedFilter)
+
+                // Sessions 영역은 Usage 아래에 연결될 본문 공간으로 남겨 둔다.
+                Spacer(minLength: 0)
+            }
+            .padding(.horizontal, OverlayMetrics.contentInset)
+            .padding(.top, 2)
+            .padding(.bottom, OverlayMetrics.contentInset)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
